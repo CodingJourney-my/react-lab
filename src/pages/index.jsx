@@ -7,16 +7,19 @@ import { useCallback, useEffect, useState } from 'react'
 export default function Home() {
   const [count, setCount] = useState(0)
 
-  // const handleClickButton = useCallback((e) => {
-  //   e.preventDefault()
-  //   alert('aaa')
-  // }, [])
-  const countUp = () => {
+  const countUp = useCallback(() => {
     setCount(count => count + 1)
-  }
-  const countDown = () => {
+  }, [])
+  const countDown = useCallback(() => {
     setCount(count => count - 1)
-  }
+  }, [])
+
+  useEffect(() => {
+    console.log("mount", count)
+    return () => {
+      console.log("unmount", count)
+    }
+  }, [count])
 
   return (
     <>
