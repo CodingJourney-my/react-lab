@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react'
 export default function Home() {
   const [count, setCount] = useState(0)
   const [text, setText] = useState('')
+  const [array, setArray] = useState([])
 
   const countUp = useCallback(() => {
     setCount(prevCount => prevCount + 1)
@@ -19,6 +20,16 @@ export default function Home() {
     // スペースの入力を制限
     setText(e.target.value.trim())
   }, [])
+
+  const handleAddArray = useCallback(() => {
+    setArray((prevArray) => {
+      if(prevArray.some(item => item === text)) {
+        alert("Already exist!")
+        return prevArray
+      }
+      return [...prevArray, text]
+    })
+  }, [text])
 
   useEffect(() => {
     console.log("mount", count)
@@ -44,6 +55,15 @@ export default function Home() {
       </button>
 
       <input type="text" value={text} onChange={handleChangeText}/>
+
+      <button onClick={handleAddArray}>
+        AddItem!!
+      </button>
+      <ul>
+        {array.map((item) => {
+          return <li key={item}>{item}</li>
+        })}
+      </ul>
       <Main/>
     </>
   )
