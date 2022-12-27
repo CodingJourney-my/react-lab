@@ -6,12 +6,18 @@ import { useCallback, useEffect, useState } from 'react'
 
 export default function Home() {
   const [count, setCount] = useState(0)
+  const [text, setText] = useState('')
 
   const countUp = useCallback(() => {
     setCount(count => count + 1)
   }, [])
   const countDown = useCallback(() => {
     setCount(count => count - 1)
+  }, [])
+
+  const handleChangeText = useCallback((e) => {
+    // スペースの入力を制限
+    setText(e.target.value.trim())
   }, [])
 
   useEffect(() => {
@@ -36,6 +42,8 @@ export default function Home() {
       <button onClick={countDown}>
         Down!
       </button>
+
+      <input type="text" value={text} onChange={handleChangeText}/>
       <Main/>
     </>
   )
