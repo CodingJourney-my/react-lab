@@ -9,10 +9,10 @@ export default function Home() {
   const [text, setText] = useState('')
 
   const countUp = useCallback(() => {
-    setCount(count => count + 1)
+    setCount(prevCount => prevCount + 1)
   }, [])
   const countDown = useCallback(() => {
-    setCount(count => count - 1)
+    setCount(prevCount => prevCount - 1)
   }, [])
 
   const handleChangeText = useCallback((e) => {
