@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import classes from 'src/styles/Home.module.css'
 import { Header } from 'src/components/Header'
-import Main from 'src/components/Main'
-import { useCallback } from 'react'
+import { Main } from 'src/components/Main'
+import { useCallback, useEffect } from 'react'
 
 export default function Home() {
 
