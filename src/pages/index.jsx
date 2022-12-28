@@ -3,33 +3,12 @@ import classes from 'src/styles/Home.module.css'
 import { Header } from 'src/components/Header'
 import { Main } from 'src/components/Main'
 import { useCallback, useEffect, useState } from 'react'
+import { useCounter } from 'src/hooks/useCounter'
+import { useInputArray } from 'src/hooks/useInputArray'
 
 export default function Home() {
-  const [count, setCount] = useState(0)
-  const [text, setText] = useState('')
-  const [array, setArray] = useState([])
-
-  const countUp = useCallback(() => {
-    setCount(prevCount => prevCount + 1)
-  }, [])
-  const countDown = useCallback(() => {
-    setCount(prevCount => prevCount - 1)
-  }, [])
-
-  const handleChangeText = useCallback((e) => {
-    // スペースの入力を制限
-    setText(e.target.value.trim())
-  }, [])
-
-  const handleAddArray = useCallback(() => {
-    setArray((prevArray) => {
-      if(prevArray.some(item => item === text)) {
-        alert("Already exist!")
-        return prevArray
-      }
-      return [...prevArray, text]
-    })
-  }, [text])
+  const { text, array, handleChangeText, handleAddArray } = useInputArray()
+  const { count, countUp, countDown } = useCounter()
 
   useEffect(() => {
     console.log("mount", count)
@@ -47,23 +26,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <h1>{count}</h1>
-      <button onClick={countUp}>
-        Up!
-      </button>
-      <button onClick={countDown}>
-        Down!
-      </button>
+      <div>
+        <button onClick={countUp}>
+          Up!
+        </button>
+        <button onClick={countDown}>
+          Down!
+        </button>
+      </div>
 
-      <input type="text" value={text} onChange={handleChangeText}/>
-
-      <button onClick={handleAddArray}>
-        AddItem!!
-      </button>
-      <ul>
-        {array.map((item) => {
-          return <li key={item}>{item}</li>
-        })}
-      </ul>
+      <div>
+        <input type="text" value={text} onChange={handleChangeText}/>
+        <button onClick={handleAddArray}>
+          AddItem!!
+        </button>
+        <ul>
+          {array.map((item) => {
+            return <li key={item}>{item}</li>
+          })}
+        </ul>
+      </div>
       <Main/>
     </>
   )
