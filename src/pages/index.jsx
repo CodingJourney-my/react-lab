@@ -2,20 +2,12 @@ import Head from 'next/head'
 import classes from 'src/styles/Home.module.css'
 import { Header } from 'src/components/Header'
 import { Main } from 'src/components/Main'
-import { useCallback, useEffect, useState } from 'react'
 import { useCounter } from 'src/hooks/useCounter'
 import { useInputArray } from 'src/hooks/useInputArray'
 
-export default function Home() {
+const Home = () => {
   const { text, array, handleChangeText, handleAddArray } = useInputArray()
   const { count, countUp, countDown } = useCounter()
-
-  useEffect(() => {
-    console.log("mount", count)
-    return () => {
-      console.log("unmount", count)
-    }
-  }, [count])
 
   return (
     <>
@@ -50,3 +42,4 @@ export default function Home() {
     </>
   )
 }
+export default Home

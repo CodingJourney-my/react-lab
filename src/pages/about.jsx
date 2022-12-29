@@ -4,7 +4,7 @@ import { Header } from 'src/components/Header'
 import { Main } from 'src/components/Main'
 import { useCallback, useEffect, useState } from 'react'
 
-export default function About() {
+const  About = () => {
   const [count, setCount] = useState(0)
   const [text, setText] = useState('')
   const [array, setArray] = useState([])
@@ -30,13 +30,6 @@ export default function About() {
       return [...prevArray, text]
     })
   }, [text])
-
-  useEffect(() => {
-    console.log("mount", count)
-    return () => {
-      console.log("unmount", count)
-    }
-  }, [count])
 
   return (
     <>
@@ -68,3 +61,4 @@ export default function About() {
     </>
   )
 }
+export default About

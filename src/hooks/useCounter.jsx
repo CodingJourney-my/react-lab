@@ -1,7 +1,11 @@
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 export const useCounter = () => {
   const [count, setCount] = useState(0)
+
+  const doubleCount = useMemo(() => {
+    count * 2
+  }, [count])
 
   const countUp = useCallback(() => {
     setCount(prevCount => prevCount + 1)
@@ -10,5 +14,5 @@ export const useCounter = () => {
     setCount(prevCount => prevCount - 1)
   }, [])
 
-  return { count, countUp, countDown }
+  return { count, doubleCount, countUp, countDown }
 }
