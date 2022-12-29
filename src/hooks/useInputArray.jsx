@@ -10,9 +10,8 @@ export const useInputArray = () => {
   }, [])
 
   const handleAddArray = useCallback(() => {
-    console.log('addArray')
     setArray((prevArray) => {
-      if(prevArray.some(item => item === text)) {
+      if(prevArray.includes(text)) {
         alert("Already exist!")
         return prevArray
       }
