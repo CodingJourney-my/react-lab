@@ -12,7 +12,7 @@ export function Header() {
       {NAV_ITEMS.map (item => {
         return (
           <Link key={item.href} href={item.href}>
-            {item.label}
+            {item.label}　
           </Link>
         )
       })}
